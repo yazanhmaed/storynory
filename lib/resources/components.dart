@@ -25,6 +25,6 @@ void navigateAndFinish(
     );
 
 String? token = '';
-String? lan = '';
+String? lan = 'ar';
 
 List<String> favoriteList = [];

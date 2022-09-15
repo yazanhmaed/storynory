@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:storynory/modules/favorite_screen/cubit/cubit.dart';
 import 'package:storynory/modules/login_screen/cubit/cubit.dart';
@@ -22,13 +23,17 @@ import 'shared/network/local/cache_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  RequestConfiguration configuration = RequestConfiguration(
+    testDeviceIds: <String>['ca-app-pub-8887736687313297/2361886259','c904ae40-ebc2-4dad-9805-c1f19a5e649a'],
+  );
+  MobileAds.instance.updateRequestConfiguration(configuration);
   await Firebase.initializeApp();
   await CacheHelper.init();
   Widget widget;
 
   bool? onBording = CacheHelper.getData(key: AppString.onBorderkey);
   token = CacheHelper.getData(key: AppString.tokenkey);
-  lan = lan == null ? 'ar' : CacheHelper.getData(key: 'lang');
+  lan = CacheHelper.getData(key: 'lang');
   print(lan);
 
   if (onBording != null) {

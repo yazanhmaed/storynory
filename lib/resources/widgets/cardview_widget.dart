@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:storynory/models/ads/view_ad.dart';
 import 'package:storynory/resources/styles_manager.dart';
 
 import '../../layout/cubit/cubit.dart';
@@ -29,7 +30,8 @@ class CardWidget extends StatelessWidget {
         onTap: () {
           //var i = 1;
           //print(model.id);
-
+          AdInterstitialView.loadinterstitalAd();
+          
           Navigator.push(
             context,
             PageTransition(
