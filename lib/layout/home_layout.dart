@@ -6,7 +6,6 @@ import 'package:storynory/modules/setting_screen/setting_screen.dart';
 import 'package:storynory/resources/components.dart';
 import 'package:storynory/resources/string_manager.dart';
 
-
 import '../modules/search/searchdata.dart';
 import '../resources/color_manager.dart';
 
@@ -39,7 +38,6 @@ class HomeLayoutScreen extends StatelessWidget {
                   icon: const Icon(Icons.favorite)),
               IconButton(
                   onPressed: () {
-                 
                     navigateTo(context, const SettingScreen());
                   },
                   icon: const Icon(Icons.settings)),

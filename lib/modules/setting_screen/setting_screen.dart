@@ -29,12 +29,12 @@ class SettingScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorManager.darksecondary,
           appBar: AppBar(
-            // title: Text(
-            //   user!.displayName!,
-            //   style: TextStyle(
-            //       color: ColorManager.white, fontWeight: FontWeight.bold),
-            // )
-            // ,
+            title: Text(
+              user?.displayName??'',
+              style: TextStyle(
+                  color: ColorManager.white, fontWeight: FontWeight.bold),
+            )
+            ,
             elevation: AppSize.s0,
           ),
           body: Padding(
