@@ -75,7 +75,7 @@ class StorieCubit extends Cubit<StorieStates> {
     },
     {
       'value': 'pt',
-      'label': 'English to Brazil',
+      'label': 'English to Portuguese',
     },
   ];
   String tranLang = 'ar';

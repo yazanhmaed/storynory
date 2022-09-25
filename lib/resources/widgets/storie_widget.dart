@@ -36,7 +36,7 @@ class StorieWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: AppPadding.p10),
           child: Scrollbar(
-            isAlwaysShown: true,
+            thumbVisibility: true,
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
