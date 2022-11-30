@@ -1,4 +1,4 @@
-package com.example.storynory
+package com.storynory.storynory
 
 import android.os.Bundle
 import com.google.firebase.FirebaseApp
