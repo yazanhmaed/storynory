@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:6b9018af0a14c60125aefc",
         "android_client_info": {
-          "package_name": "com.example.storiedisktop"
+          "package_name": "com.storynorys.storiedisktop"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "694326366389-a71e8qb1ggu3uhamna6nbl83q8ml8mvh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.storiedisktop",
+            "package_name": "com.storynorys.storiedisktop",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
           }
         },
@@ -47,7 +47,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:a602967b2e32d73425aefc",
         "android_client_info": {
-          "package_name": "com.example.storiesenglish"
+          "package_name": "com.storynorys.storiesenglish"
         }
       },
       "oauth_client": [
@@ -55,7 +55,7 @@
           "client_id": "694326366389-3madlketoude2ldcbee9aj2idor1l9jj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.storiesenglish",
+            "package_name": "com.storynorys.storiesenglish",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
           }
         },
@@ -84,7 +84,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:22f63839eaa0c66225aefc",
         "android_client_info": {
-          "package_name": "com.example.storynory"
+          "package_name": "com.storynorys.storynory"
         }
       },
       "oauth_client": [
@@ -92,7 +92,7 @@
           "client_id": "694326366389-2lt9j15gd5np61lk26pngt6nlgsnj4n4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.storynory",
+            "package_name": "com.storynorys.storynory",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
           }
         },
