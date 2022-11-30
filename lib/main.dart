@@ -23,15 +23,8 @@ import 'shared/network/local/cache_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  RequestConfiguration configuration = RequestConfiguration(
-    testDeviceIds: <String>[
-      'ca-app-pub-8887736687313297/2361886259',
-      'c904ae40-ebc2-4dad-9805-c1f19a5e649a',
-      '5AA745771F7E3307328336D67FD5E1E5',
-      '622E5C582D3103E1CB310E5BFF1101E8'
-    ],
-  );
-  MobileAds.instance.updateRequestConfiguration(configuration);
+
+  MobileAds.instance.initialize();
   await Firebase.initializeApp();
   await CacheHelper.init();
   Widget widget;
