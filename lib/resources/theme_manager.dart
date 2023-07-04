@@ -23,12 +23,13 @@ ThemeData getApplicationTheme() {
         color: ColorManager.primary,
         elevation: AppSize.s1_5,
         shadowColor: ColorManager.secondary,
+        centerTitle: true,
         titleTextStyle:
             getBoldStyle(color: ColorManager.white, fontSize: FontSize.s20)),
     //bottomNavigationBar Theme
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: ColorManager.primary,
-      selectedItemColor: ColorManager.secondary,
+      selectedItemColor: ColorManager.secondary2,
       unselectedItemColor: Colors.grey,
     ),
 //button theme
@@ -42,7 +43,8 @@ ThemeData getApplicationTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle:
-            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s18), backgroundColor: ColorManager.primary,
+            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s18),
+        backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.s12)),
       ),

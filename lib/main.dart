@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/favorite_screen/cubit/cubit.dart';
 import 'package:storynory/modules/login_screen/cubit/cubit.dart';
+import 'package:storynory/modules/no_internet/no_internet.dart';
 import 'package:storynory/resources/components.dart';
 
 import 'package:storynory/resources/string_manager.dart';
@@ -23,7 +25,6 @@ import 'shared/network/local/cache_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   MobileAds.instance.initialize();
   await Firebase.initializeApp();
   await CacheHelper.init();
@@ -32,17 +33,25 @@ void main() async {
   bool? onBording = CacheHelper.getData(key: AppString.onBorderkey);
   token = CacheHelper.getData(key: AppString.tokenkey);
   lan = CacheHelper.getData(key: 'lang');
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-  if (onBording != null) {
-    // ignore: unrelated_type_equality_checks
-    if (token != null) {
-      widget = const HomeLayoutScreen();
+  bool result = await InternetConnectionChecker().hasConnection;
+  if (result == true) {
+    if (onBording != null) {
+      // ignore: unrelated_type_equality_checks
+      if (token != null) {
+        widget = const HomeLayoutScreen();
+      } else {
+        widget = const LoginScreen();
+      }
     } else {
-      widget = const LoginScreen();
+      widget = const OnBoardingScreen();
     }
+   
   } else {
-    widget = const OnBoardingScreen();
+    widget = const NoInternet();
   }
+
   Bloc.observer = MyBlocObserver();
   runApp(MyApp(
     startWidget: widget,
@@ -57,28 +66,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => StorieCubit()
-            ..getStorie()
-            ..getAdvanceStorie(),
-        ),
+        BlocProvider(create: (context) => StorieCubit()..getStorie()),
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
         BlocProvider(
-          create: (context) => FavoriteCubit()..getFavoriteStorie(),
+          create: (context) => FavoriteCubit(),
         ),
       ],
       child: BlocConsumer<StorieCubit, StorieStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return MaterialApp(
+        return ScreentasiaInit(
+      adaptiveFrom: AdaptiveFrom.mobile, 
+      adaptivePercentage: const AdaptivePercentage(mobile:100,tablet:100,desktop:100),
+      builder: (context , child) {
+        return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: getApplicationTheme(),
-            home: SplashScreens(
+            home: child,
+          );
+      },
+      child: SplashScreens(
               startWidget: startWidget,
             ),
-          );
+    );
+          
+         
         },
       ),
     );

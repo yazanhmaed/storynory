@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:storynory/modules/favorite_screen/cubit/cubit.dart';
 
 import 'package:storynory/resources/color_manager.dart';
-import 'package:storynory/resources/string_manager.dart';
-import 'package:storynory/resources/values_manager.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
 
-import '../../resources/widgets/storie_widget.dart';
+import '../../resources/widgets/book_display.dart';
 
 class StorieScreen extends StatelessWidget {
   const StorieScreen({
@@ -40,40 +36,11 @@ class StorieScreen extends StatelessWidget {
         var cubit = StorieCubit.get(context);
         var cubit2 = FavoriteCubit.get(context);
         cubit2.boolFav(id: id);
-
         bool switchbool = cubit.switched;
         return Scaffold(
           backgroundColor: ColorManager.darksecondary,
           appBar: AppBar(
             actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: AppPadding.p10),
-                child: FlutterSwitch(
-                  activeColor: ColorManager.darksecondary,
-                  inactiveText: AppString.inactiveText,
-                  inactiveIcon:
-                      const FaIcon(Icons.translate, color: Colors.black),
-                  activeText: AppString.activeText,
-                  activeIcon: const FaIcon(
-                    Icons.translate,
-                    color: Colors.black,
-                  ),
-                  width: Appwidth.w100,
-                  height: Appwidth.w40,
-                  valueFontSize: AppSize.s10,
-                  toggleSize: AppSize.s40,
-                  value: cubit.switched,
-                  borderRadius: AppSize.s30,
-                  padding: AppPadding.p5,
-                  showOnOff: true,
-                  onToggle: (val) {
-                    cubit.changecurrentSwitch(val);
-                    if (val == false) {
-                      cubit.empty();
-                    }
-                  },
-                ),
-              ),
               IconButton(
                   onPressed: () {
                     cubit2.boolfav == false
@@ -98,7 +65,7 @@ class StorieScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.arrow_back_ios)),
           ),
-          body: StorieWidget(
+          body: BookDisplay(
               title: title,
               author: author,
               image: image,

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:6b9018af0a14c60125aefc",
         "android_client_info": {
-          "package_name": "com.storynorys.storiedisktop"
+          "package_name": "com.example.storiedisktop"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "694326366389-a71e8qb1ggu3uhamna6nbl83q8ml8mvh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.storynorys.storiedisktop",
+            "package_name": "com.example.storiedisktop",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
           }
         },
@@ -36,7 +36,44 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
+              "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694326366389:android:10ce1ab8b86f465025aefc",
+        "android_client_info": {
+          "package_name": "com.example.storiedisktops"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694326366389-cdaskk2tsqfvhtooht02nnli2na0go9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.storiedisktops",
+            "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
+          }
+        },
+        {
+          "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfd4V-TDeppXsEFdZ7nV5mixCtNCFED3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -47,7 +84,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:a602967b2e32d73425aefc",
         "android_client_info": {
-          "package_name": "com.storynorys.storiesenglish"
+          "package_name": "com.example.storiesenglish"
         }
       },
       "oauth_client": [
@@ -55,7 +92,7 @@
           "client_id": "694326366389-3madlketoude2ldcbee9aj2idor1l9jj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.storynorys.storiesenglish",
+            "package_name": "com.example.storiesenglish",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
           }
         },
@@ -73,7 +110,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
+              "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -84,7 +121,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:694326366389:android:22f63839eaa0c66225aefc",
         "android_client_info": {
-          "package_name": "com.storynorys.storynory"
+          "package_name": "com.example.storynory"
         }
       },
       "oauth_client": [
@@ -92,8 +129,16 @@
           "client_id": "694326366389-2lt9j15gd5np61lk26pngt6nlgsnj4n4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.storynorys.storynory",
+            "package_name": "com.example.storynory",
             "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
+          }
+        },
+        {
+          "client_id": "694326366389-3tf59pot4sgfev8tarfp56fs9ai7jc7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.storynory",
+            "certificate_hash": "167695f7ef9c70f50f0a9aa1ae2ef999376f80f7"
           }
         },
         {
@@ -110,12 +155,58 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
+              "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694326366389:android:714538069010608725aefc",
+        "android_client_info": {
+          "package_name": "com.storynorys.storynory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694326366389-0qvu9uplj0l9e9ctfdf341i83539sqca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storynorys.storynory",
+            "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
+          }
+        },
+        {
+          "client_id": "694326366389-hmqom7e1t3vuiouhf9bqslq3vcepfs7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storynorys.storynory",
+            "certificate_hash": "167695f7ef9c70f50f0a9aa1ae2ef999376f80f7"
+          }
+        },
+        {
+          "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfd4V-TDeppXsEFdZ7nV5mixCtNCFED3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8887736687313297~9557441847"
     }
   ],
   "configuration_version": "1"

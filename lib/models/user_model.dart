@@ -1,17 +1,33 @@
-class UserStorieModel {
-  String? id;
+class UserModel {
+  String? uId;
+  String? name;
+  String? email;
+  String? token;
+  
 
-  UserStorieModel({
-    this.id,
+  UserModel({
+    this.uId,
+    this.name,
+    this.email,
+    this.token,
+  
   });
 
-  UserStorieModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  UserModel.fromJson(Map<String, dynamic> json) {
+    uId = json['uId'];
+    name = json['name'];
+    email = json['email'];
+    token = json['token'];
+    
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'uId': uId,
+      'name': name,
+      'email': email,
+      'token': token,
+     
     };
   }
 }

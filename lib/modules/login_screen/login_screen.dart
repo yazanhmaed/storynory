@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:screentasia/screentasia.dart';
 import 'package:storynory/layout/home_layout.dart';
 import 'package:storynory/modules/login_screen/cubit/cubit.dart';
 import 'package:storynory/modules/login_screen/cubit/states.dart';
@@ -7,10 +9,12 @@ import 'package:storynory/modules/login_screen/cubit/states.dart';
 import 'package:storynory/resources/color_manager.dart';
 import 'package:storynory/resources/components.dart';
 
-import 'package:storynory/resources/values_manager.dart';
 import 'package:storynory/shared/network/local/cache_helper.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../resources/string_manager.dart';
+import '../../resources/widgets/login.dart';
+import '../../resources/widgets/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -25,62 +29,130 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(listener: (context, state) {
-      if (state is StorieLoginSuccessState) {
-        if (state.tokenLogin.uid != null) {
-          CacheHelper.seveData(
-                  key: AppString.tokenkey, value: state.tokenLogin.uid)
-              .then((value) {
-            token = state.tokenLogin.uid!;
-            print(lan);
+      if (state is AddUserErrorState) {
+        if (state.error.toString() ==
+            '[firebase_auth/weak-password] Password should be at least 6 characters') {
+          Fluttertoast.showToast(
+              msg: 'Password should be at least 6 characters',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Email already exists',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
+      if (state is UserErrorState) {
+        Fluttertoast.showToast(
+            msg: 'Verify your email and password',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+      if (state is UserSuccessState) {
+        token = state.uId;
+        CacheHelper.seveData(key: 'token', value: state.uId).then((value) {
+          print(state.uId);
+          navigateAndFinish(context, const HomeLayoutScreen());
+        });
 
-            navigateAndFinish(context, const HomeLayoutScreen());
-          }).catchError((onError) {
-            print(onError);
-          });
+        if (state is AddCreateUserSuccessState) {
+          LoginCubit.get(context).positive = 0;
         }
       }
     }, builder: (context, state) {
       var cubit = LoginCubit.get(context);
-
+      var key = GlobalKey<FormState>();
       return Scaffold(
         backgroundColor: ColorManager.primary,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(child: Image.asset(AppString.errorimage)),
-            const SizedBox(height: Appheight.h1),
-            GestureDetector(
-              onTap: () {
-                lan = AppString.language;
-                cubit.signInWithGoogle();
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppSize.s20),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: ColorManager.white,
-                    borderRadius: BorderRadius.circular(AppSize.s15)),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Appheight.h10, vertical: Appheight.h15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      height: Appheight.h30,
-                      child: Image.asset(AppString.googleImages),
-                    ),
-                    Text(
-                      AppString.googleUp,
-                      style: TextStyle(
-                        color: ColorManager.black,
-                        fontSize: AppSize.s18,
-                      ),
-                    )
+        body: Form(
+          key: key,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics()),
+            child: Column(
+            
+              children: [
+                Center(
+                    child: Image.asset(
+                  AppString.errorimage,
+                  height: 300.h,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                )),
+                ToggleSwitch(
+                  animate: true,
+                  minHeight: 40,
+                  minWidth: 190.0,
+                  cornerRadius: 30.0,
+                  activeBgColors: [
+                    [ColorManager.amber],
+                    [ColorManager.amber]
                   ],
+                  borderColor: [
+                    ColorManager.white.withOpacity(0.7),
+                    ColorManager.white.withOpacity(0.7),
+                  ],
+                  borderWidth: 10,
+                  activeFgColor: Colors.white,
+                  inactiveBgColor: ColorManager.primary.withOpacity(0.7),
+                  inactiveFgColor: Colors.white,
+                  initialLabelIndex: cubit.positive,
+                  totalSwitches: 2,
+                  labels: const ['Login', 'Sign Up'],
+                  radiusStyle: true,
+                  onToggle: (index) {
+                    cubit.changecurrentSwitch(posit: index!);
+                  },
                 ),
-              ),
+                cubit.positive == 0
+                    ? LoginBuilder(
+                        positive: cubit.positive,
+                        onTap: () => cubit.signInWithGoogle(),
+                        obscureText: cubit.obscureText,
+                        onPressedobscureText: () => cubit.changeobscureText(),
+                        emailController: cubit.emailController,
+                        passwordController: cubit.passwordController,
+                        onPressed: () async {
+                          if (key.currentState!.validate()) {
+                            cubit.userLogin(
+                                email: cubit.emailController.text,
+                                password: cubit.passwordController.text);
+                          }
+                        },
+                      )
+                    : SignUpBuilder(
+                        positive: cubit.positive,
+                        obscureText: cubit.obscureText,
+                        onPressedobscureText: () => cubit.changeobscureText(),
+                        nameController: cubit.nameController,
+                        emailController: cubit.emailController,
+                        passwordController: cubit.passwordController,
+                        onPressed: () {
+                          if (key.currentState!.validate()) {
+                            cubit.userRegister(
+                              name: cubit.nameController.text,
+                              email: cubit.emailController.text,
+                              password: cubit.passwordController.text,
+                              token: cubit.token,
+                            );
+                          }
+                        }),
+              ],
             ),
-          ],
+          ),
         ),
       );
     });

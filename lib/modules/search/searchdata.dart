@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:storynory/resources/string_manager.dart';
 
-import '../../layout/cubit/cubit.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/components.dart';
 import '../../resources/styles_manager.dart';
@@ -13,8 +12,7 @@ import '../storie_layout/storie_screen.dart';
 
 class SearchDataScreen extends SearchDelegate {
   CollectionReference storie = FirebaseFirestore.instance.collection('Storie');
-  CollectionReference advanceStorie =
-      FirebaseFirestore.instance.collection('AdvanceStorie');
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return <Widget>[
@@ -37,11 +35,8 @@ class SearchDataScreen extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    var cubit = StorieCubit.get(context);
     return StreamBuilder<QuerySnapshot>(
-        stream: cubit.currentIndex == 0
-            ? storie.snapshots().asBroadcastStream()
-            : advanceStorie.snapshots().asBroadcastStream(),
+        stream: storie.snapshots().asBroadcastStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const Center(

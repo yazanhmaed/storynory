@@ -6,9 +6,12 @@ import '../values_manager.dart';
 class ListSetting extends StatelessWidget {
   final Function()? ontap;
   final String text;
-  final Widget? trainling;
+  final Widget? leading;
   const ListSetting({
-    Key? key, required this.ontap, required this.text,required this.trainling,
+    Key? key,
+    required this.ontap,
+    required this.text,
+    required this.leading,
   }) : super(key: key);
 
   @override
@@ -19,11 +22,15 @@ class ListSetting extends StatelessWidget {
       child: ListTile(
         onTap: ontap,
         title: Text(
-         text,
+          text,
           style:
               TextStyle(color: ColorManager.white, fontWeight: FontWeight.bold),
         ),
-        trailing: trainling,
+        leading: leading,
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.white,
+        ),
       ),
     );
   }

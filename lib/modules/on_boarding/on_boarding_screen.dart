@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:storynory/home_p.dart';
+import 'package:storynory/stream.dart';
 import 'package:storynory/resources/color_manager.dart';
 import 'package:storynory/resources/string_manager.dart';
 import 'package:storynory/resources/styles_manager.dart';
@@ -55,11 +55,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void submit() {
     CacheHelper.seveData(key: AppString.onBorderkey, value: true).then((value) {
       if (value) {
-        return navigateAndFinish(context, const Homep());
+        return navigateAndFinish(context, const Stream());
       }
-      print(value);
+      // print(value);
     }).catchError((onError) {
-      print(onError.toString());
+      // print(onError.toString());
     });
   }
 
@@ -68,7 +68,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.secondary,
+      backgroundColor: ColorManager.lightPrimary,
       appBar: AppBar(
         actions: [
           TextButton(
@@ -146,7 +146,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget buildBoardingItem(BoardingModel model) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: Image(image: AssetImage(model.image))),
+          Expanded(child: Center(child: Image(image: AssetImage(model.image)))),
           const SizedBox(height: Appheight.h30),
           Text(
             model.title,

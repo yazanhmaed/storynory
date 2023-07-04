@@ -9,45 +9,30 @@ import 'package:storynory/resources/components.dart';
 
 import 'package:translator/translator.dart';
 
-import '../../models/advance_storie_model.dart';
-
 import '../../models/storie_model.dart';
-import '../../modules/screens/advance_story_screen.dart';
-import '../../modules/screens/story_screen.dart';
+import '../../modules/favorite_screen/favorite_screen.dart';
+import '../../modules/screens/storys.dart';
+import '../../modules/screens/home_screen.dart';
+import '../../modules/setting_screen/setting_screen.dart';
 
 class StorieCubit extends Cubit<StorieStates> {
   StorieCubit() : super(StorieInitialState());
 
   static StorieCubit get(context) => BlocProvider.of(context);
 
-  List<AdvanceStorieModel> advanceStorie = [];
-
-  Future<void> getAdvanceStorie() async {
-    advanceStorie = [];
-    emit(StorieGetAdvanceloadingState());
-    await FirebaseFirestore.instance
-        .collection('AdvanceStorie')
-        .get()
-        .then((value) {
-      for (var e in value.docs) {
-        advanceStorie.add(AdvanceStorieModel.fromJson(e.data()));
-      }
-      emit(StorieGetAdvanceSuccessState());
-    }).catchError((onError) {
-      print(onError);
-      emit(StorieGetAdvanceErrorState());
-    });
-  }
-
   List<StorieModel> storie = [];
+  List<StorieModel> stories = [];
 
   Future<void> getStorie() async {
     storie = [];
+    stories = [];
     emit(StorieGetloadingState());
     await FirebaseFirestore.instance.collection('Storie').get().then((value) {
       for (var e in value.docs) {
         storie.add(StorieModel.fromJson(e.data()));
       }
+
+      stories.addAll(storie);
 
       emit(StorieGetSuccessState());
     }).catchError((onError) {
@@ -84,7 +69,7 @@ class StorieCubit extends Cubit<StorieStates> {
     LangModel langModel;
     tranLang = val;
     langModel = LangModel(lang: val);
-    print('$tranLang yazan');
+    print(tranLang);
     emit(StorieLangSuccessState(langModel));
   }
 
@@ -93,7 +78,7 @@ class StorieCubit extends Cubit<StorieStates> {
   String? orword = '';
   final translator = GoogleTranslator();
   void translatorWord({required String text}) {
-    translator.translate(text, from: 'en', to: lan!).then((value) {
+    translator.translate(text, from: 'en', to: lan ?? 'ar').then((value) {
       transWord = value.toString();
       emit(TextTransSuccessState());
     }).catchError((onError) {
@@ -113,21 +98,6 @@ class StorieCubit extends Cubit<StorieStates> {
     emit(TextwordState());
   }
 
-  void updateAdvanceData({
-    required int count,
-    required String uId,
-  }) {
-    FirebaseFirestore.instance
-        .collection('AdvanceStorie')
-        .doc(uId)
-        .update({'view': FieldValue.increment(count)}).then((value) {
-      emit(StorieUpdateSuccessState());
-    }).catchError((onError) {
-      print(onError);
-      emit(StorieUpdateErrorState());
-    });
-  }
-
   void updateData({
     required int count,
     required String uId,
@@ -143,10 +113,12 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  int currentIndex = 0;
   List<Widget> screen = [
-    const StoryScreen(),
-    const AdvanceStoryScreen(),
+    const HomeStorysScreen(),
+    const StorysScreen(),
+    const FavoriteScreen(),
+    Container(),
+    const SettingScreen(),
   ];
   void changecurrentIndex(int index) {
     currentIndex = index;

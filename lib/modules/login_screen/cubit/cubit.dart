@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
 import 'package:storynory/modules/login_screen/cubit/states.dart';
 
-import '../../../models/login_model.dart';
 import '../../../models/user_model.dart';
 import '../../../resources/components.dart';
 
@@ -20,7 +21,6 @@ class LoginCubit extends Cubit<LoginStates> {
   GoogleSignInAccount get user => _user!;
 
   Future signInWithGoogle() async {
-    TokenLogin tokenLogin;
     // Trigger the authentication flow
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     // Obtain the auth details from the request
@@ -36,16 +36,20 @@ class LoginCubit extends Cubit<LoginStates> {
     // Once signed in, return the UserCredential
 
     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
-      //  print(value.credential!.token);
-      tokenLogin = TokenLogin(uid: value.user!.uid);
+      userCreate(
+        uId: value.user!.uid,
+        email: value.user!.email!,
+        name: value.user!.displayName!,
+        token: token,
+      );
 
-      userCreate(uId: value.user!.uid);
-      userid = value.user!.uid;
-      token = value.user!.uid;
+      getUser(uId: value.user!.uid);
 
-      emit(StorieLoginSuccessState(tokenLogin));
+      emit(UserSuccessState(
+        value.user!.uid,
+        value.user!.email!,
+      ));
     }).catchError((onError) {
-      emit(StorieLoginErrorState());
       print(onError);
     });
   }
@@ -61,20 +65,124 @@ class LoginCubit extends Cubit<LoginStates> {
     });
   }
 
-  void userCreate({required String uId}) {
-    UserStorieModel user = UserStorieModel(
-      id: uId,
-    );
-    FirebaseFirestore.instance
-        .collection('user')
-        .doc(uId)
-        .set(user.toMap())
-        .then((value) {
-      emit(StorieUserSuccessState());
+  void getPassword({
+    required String email,
+  }) {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email).then((value) {
+      emit(PasswordResetSuccessState());
     }).catchError((onError) {
-      print(onError);
-      emit(StorieUserErrorState());
+      Fluttertoast.showToast(
+          msg: 'Check your Email',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(PasswordResetErrorState());
     });
   }
 
+  int positive = 0;
+  void changecurrentSwitch({required int posit}) {
+    positive = posit;
+    emit(ChangeSuccessState());
+  }
+
+  userCreate({
+    required String uId,
+    required String name,
+    required String email,
+    required String token,
+  }) {
+    UserModel userModel = UserModel(
+      name: name,
+      uId: uId,
+      email: email,
+      token: token,
+    );
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uId)
+        .collection('profile')
+        .doc()
+        .set(userModel.toMap())
+        .then((value) {
+      emit(AddCreateUserSuccessState());
+    }).catchError((onError) {
+      print(onError);
+    });
+  }
+
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var token = '';
+  userLogin({
+    required String email,
+    required String password,
+  }) {
+    emit(UserLoadingState());
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) {
+      print(value.user!.email);
+      getUser(uId: value.user!.uid);
+      emit(UserSuccessState(value.user!.uid, value.user!.email!));
+    }).catchError((onError) {
+      print(onError);
+      emit(UserErrorState());
+    });
+  }
+
+  List<UserModel> users = [];
+  String n = '';
+  void getUser({
+    required String uId,
+  }) async {
+    users = [];
+    await FirebaseFirestore.instance
+        .collection('Users/')
+        .doc(uId)
+        .collection('profile')
+        .get()
+        .then((value) {
+      for (var e in value.docs) {
+        users.add(UserModel.fromJson(e.data()));
+      }
+      nameUser = users[0].name!;
+      n = users[0].name!;
+
+      emit(GetUserSuccessState(users[0].name!));
+    }).catchError((onError) {
+      print(onError);
+    });
+  }
+
+  void userRegister({
+    required String name,
+    required String email,
+    required String password,
+    required String token,
+  }) {
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) {
+      userCreate(
+        uId: value.user!.uid,
+        name: name,
+        email: email,
+        token: token,
+      );
+      emit(AddUserSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AddUserErrorState(onError.toString()));
+    });
+  }
+   bool obscureText = true;
+  void changeobscureText() {
+    obscureText = !obscureText;
+    emit(ChangeobscureTextSuccessState());
+  }
 }

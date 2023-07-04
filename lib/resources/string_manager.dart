@@ -6,6 +6,10 @@ class AppString {
   static const advanceStorie = 'Advance Storie';
   static const storynory = 'Storynory';
   static const errorimage = 'assets/images/play_store.png';
+  static const google = 'assets/images/google.png';
+  static const googleUrl = 'https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg';
+  static const imageUrl = 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png';
+
   static const language = 'ar';
   static const ok = 'OK';
 
@@ -13,10 +17,10 @@ class AppString {
 
   static const onBorderSKIP = 'SKIP';
   //images
-  static const onBorderimages1 = 'assets/images/o1.gif';
-  static const onBorderimages2 = 'assets/images/o2.gif';
-  static const onBorderimages3 = 'assets/images/o3.gif';
-  static const onBorderimages4 = 'assets/images/o4.gif';
+  static const onBorderimages1 = 'assets/images/ob1.gif';
+  static const onBorderimages2 = 'assets/images/ob2.gif';
+  static const onBorderimages3 = 'assets/images/ob3.gif';
+  static const onBorderimages4 = 'assets/images/ob4.gif';
   //title
   static const onBordertitle1 = 'Story';
   static const onBordertitle2 = 'Search';

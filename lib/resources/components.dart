@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-
-
 void navigateTo(context, widget) => Navigator.push(
       context,
       MaterialPageRoute(
@@ -24,8 +22,9 @@ void navigateAndFinish(
         return false;
       },
     );
-
+int currentIndex = 0;
 String? token = '';
 String? lan = 'ar';
+String nameUser = '';
 
 List<String> favoriteList = [];

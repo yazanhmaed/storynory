@@ -13,11 +13,11 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
 
   final userF = FirebaseAuth.instance.currentUser;
   List<FavoriteModel> favSt = [];
-
+  bool boolfav = false;
   void getFavoriteStorie() async {
     favSt = [];
     favoriteList = [];
-   
+
     await FirebaseFirestore.instance
         .collection('user')
         .doc(token)
@@ -26,19 +26,18 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
         .then((value) {
       for (var e in value.docs) {
         favSt.add(FavoriteModel.fromJson(e.data()));
+      }
 
-      
-      }
-      for (int i = 0; i <= favSt.length; i++) {
-        print(favSt[i].id);
+      for (int i = 0; i < favSt.length; i++) {
+        //print(favSt[i].id);
         favoriteList.add(favSt[i].id!);
-       
       }
-      
+      //print(boolfav);
+      //print(favoriteList.length);
 
       emit(StorieGetFavSuccessState());
     }).catchError((onError) {
-      print(onError);
+     // print(onError);
       emit(StorieGetFavErrorState());
     });
   }
@@ -68,6 +67,7 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
       'image': image,
       'view': view,
     }).then((value) {
+      boolfav = true;
       getFavoriteStorie();
       emit(StorieUserFavSuccessState());
     }).catchError((onError) {
@@ -93,10 +93,10 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
     });
   }
 
-  bool boolfav = false;
   void boolFav({required String id}) {
     boolfav = favoriteList.contains(id);
     print(boolfav);
     emit(StorieBoolFavState());
   }
+
 }

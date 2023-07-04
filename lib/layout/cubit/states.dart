@@ -24,13 +24,6 @@ class StorieGetSuccessState extends StorieStates {}
 
 class StorieGetErrorState extends StorieStates {}
 
-//get data Advance
-class StorieGetAdvanceloadingState extends StorieStates {}
-
-class StorieGetAdvanceSuccessState extends StorieStates {}
-
-class StorieGetAdvanceErrorState extends StorieStates {}
-
 //delete data
 class StorieRemoveSuccessState extends StorieStates {}
 
@@ -59,5 +52,7 @@ class TextTransErrorState extends StorieStates {}
 class TextEmptewordState extends StorieStates {}
 
 class TextwordState extends StorieStates {}
+
+
 
 

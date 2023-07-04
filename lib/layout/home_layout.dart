@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:storynory/modules/favorite_screen/favorite_screen.dart';
 
-import 'package:storynory/modules/setting_screen/setting_screen.dart';
-import 'package:storynory/resources/components.dart';
 import 'package:storynory/resources/string_manager.dart';
 
 import '../modules/search/searchdata.dart';
 import '../resources/color_manager.dart';
+
+import 'package:storynory/resources/components.dart';
 
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
@@ -23,37 +22,37 @@ class HomeLayoutScreen extends StatelessWidget {
         var cubit = StorieCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.primary,
-          appBar: AppBar(
-            title: const Text(AppString.storynory),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    showSearch(context: context, delegate: SearchDataScreen());
-                  },
-                  icon: const Icon(Icons.search)),
-              IconButton(
-                  onPressed: () {
-                    navigateTo(context, const FavoriteScreen());
-                  },
-                  icon: const Icon(Icons.favorite)),
-              IconButton(
-                  onPressed: () {
-                    navigateTo(context, const SettingScreen());
-                  },
-                  icon: const Icon(Icons.settings)),
-            ],
-          ),
-          body: cubit.screen[cubit.currentIndex],
+          body: cubit.screen[currentIndex],
           bottomNavigationBar: BottomNavigationBar(
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.book), label: AppString.storie),
+                  icon: const Icon(Icons.home),
+                  label: 'Home',
+                  backgroundColor: ColorManager.primary),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.book), label: AppString.advanceStorie),
+                  icon: const Icon(Icons.menu_book_outlined),
+                  label: AppString.storie,
+                  backgroundColor: ColorManager.primary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.favorite),
+                  label: AppString.list1,
+                  backgroundColor: ColorManager.primary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.search),
+                  label: 'Search',
+                  backgroundColor: ColorManager.primary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.person),
+                  label: 'Profile',
+                  backgroundColor: ColorManager.primary),
             ],
-            currentIndex: cubit.currentIndex,
+            currentIndex: currentIndex,
             onTap: (index) {
-              cubit.changecurrentIndex(index);
+              if (index == 3) {
+                showSearch(context: context, delegate: SearchDataScreen());
+              } else {
+                cubit.changecurrentIndex(index);
+              }
             },
           ),
         );
