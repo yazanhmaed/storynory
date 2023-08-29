@@ -1,9 +1,9 @@
 # storynory
 
-An amazing app that offers stories in English and discover a whole new world of storytelling. With this easy to use app, you can effortlessly translate any unfamiliar words, ensuring a smooth reading experience. Immerse yourself in the enchanting stories and expand your vocabulary along the way. Download Storynory today and embark on a journey of words and imagination like never before!
+<h3>An amazing app that offers stories in English and discovers a whole new world of storytelling. With this easy-to-use app, you can effortlessly translate any unfamiliar words, ensuring a smooth reading experience. Immerse yourself in the enchanting stories and expand your vocabulary along the way. Download Storynory today and embark on a journey of words and imagination like never before!</h3>
 
-<a>https://play.google.com/store/apps/details?id=com.storynorys.storynory</a>
 
+<a href="https://play.google.com/store/apps/details?id=com.storynorys.storynory" target="blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_Play_2022_icon.svg/928px-Google_Play_2022_icon.svg.png" alt="google play" height="50" width="50" /></a>
 <h2>storynory</h2>
 
 <img src="https://github.com/yazanhmaed/storynory/assets/93092669/b931d339-843f-4bc5-ab98-d04f6deaf511" alt="Some Content" style="height:600px;">
