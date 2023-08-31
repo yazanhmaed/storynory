@@ -1,16 +1,19 @@
 # storynory
 
-A new Flutter project.
+<h3>An amazing app that offers stories in English and discovers a whole new world of storytelling. With this easy-to-use app, you can effortlessly translate any unfamiliar words, ensuring a smooth reading experience. Immerse yourself in the enchanting stories and expand your vocabulary along the way. Download Storynory today and embark on a journey of words and imagination like never before!</h3>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<a href="https://play.google.com/store/apps/details?id=com.storynorys.storynory" target="blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_Play_2022_icon.svg/928px-Google_Play_2022_icon.svg.png" alt="google play" height="50" width="50" /></a>
+<h2>storynory</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://github.com/yazanhmaed/storynory/assets/93092669/b931d339-843f-4bc5-ab98-d04f6deaf511" alt="Some Content" style="height:600px;">
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<h2>Home Screen</h2>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/yazanhmaed/storynory/assets/93092669/e2370d03-971d-4918-ae19-453a09e18e52" alt="Some Content" style="height:600px;">
+
+<h2>Story Screen</h2>
+
+<img src="https://github.com/yazanhmaed/storynory/assets/93092669/65571d68-a7e7-410e-a7b4-a60ac2e1d3ab" alt="Some Content" style="height:600px;">
+
+<img src="https://github.com/yazanhmaed/storynory/assets/93092669/d0644645-3945-492c-b860-0a4673e64548" alt="Some Content" style="height:600px;">
