@@ -7,8 +7,10 @@ class AppString {
   static const storynory = 'Storynory';
   static const errorimage = 'assets/images/play_store.png';
   static const google = 'assets/images/google.png';
-  static const googleUrl = 'https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg';
-  static const imageUrl = 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png';
+  static const googleUrl =
+      'https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg';
+  static const imageUrl =
+      'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png';
 
   static const language = 'ar';
   static const ok = 'OK';
@@ -47,7 +49,7 @@ class AppString {
 
   //SearchScreen
   static const searchScreenText = 'No Search query found';
-  static const searchScreenText2 = 'Search anything here';
+  static const searchScreenText2 = 'Search ';
 
   //LoginScreen
   static const googleImages = 'assets/images/google.png';
@@ -64,7 +66,7 @@ class AppString {
   static const list5 = 'Logout';
   //AlertDialog
   static const adtext1 = 'Translation Language';
-  static const adtext2 = 'Description';
+  static const adtext2 = 'About';
 
   static const labelText2 =
       "This app provides you a large and fine collection of the English Stories for everyone with multiple categories and morals.  The user interface is very fast and Words can also be translated Stories are updated without the need to update the app Learn English through stories  Needs an internet connection to get the translation* Quote stories from :americanliterature..!!!";

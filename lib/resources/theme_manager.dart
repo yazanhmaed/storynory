@@ -25,7 +25,10 @@ ThemeData getApplicationTheme() {
         shadowColor: ColorManager.secondary,
         centerTitle: true,
         titleTextStyle:
-            getBoldStyle(color: ColorManager.white, fontSize: FontSize.s20)),
+            getBoldStyle(color: ColorManager.white, fontSize: FontSize.s20),
+            iconTheme: IconThemeData(color: ColorManager.secondary)
+            ),
+    
     //bottomNavigationBar Theme
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: ColorManager.primary,

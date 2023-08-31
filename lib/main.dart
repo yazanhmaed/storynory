@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:screentasia/screentasia.dart';
-import 'package:storynory/modules/favorite_screen/cubit/cubit.dart';
-import 'package:storynory/modules/login_screen/cubit/cubit.dart';
-import 'package:storynory/modules/no_internet/no_internet.dart';
+import 'package:storynory/modules/layout/controller/cubit.dart';
+import 'package:storynory/modules/layout/controller/states.dart';
+import 'package:storynory/modules/layout/view/screens/home_layout.dart';
+import 'package:storynory/modules/login_screen/controller/cubit.dart';
+import 'package:storynory/modules/no_internet/view/screens/no_internet.dart';
 import 'package:storynory/resources/components.dart';
 
 import 'package:storynory/resources/string_manager.dart';
@@ -14,13 +16,10 @@ import 'package:storynory/resources/theme_manager.dart';
 
 import 'package:storynory/shared/bloc.dart';
 
-import 'layout/cubit/cubit.dart';
-import 'layout/cubit/states.dart';
 
-import 'layout/home_layout.dart';
-import 'modules/login_screen/login_screen.dart';
-import 'modules/on_boarding/on_boarding_screen.dart';
-import 'modules/splash_screen/splashscreen.dart';
+import 'modules/login_screen/view/screens/login_screen.dart';
+import 'modules/on_boarding/view/screens/on_boarding_screen.dart';
+import 'modules/splash_screen/view/screens/splashscreen.dart';
 import 'shared/network/local/cache_helper.dart';
 
 void main() async {
@@ -47,7 +46,6 @@ void main() async {
     } else {
       widget = const OnBoardingScreen();
     }
-   
   } else {
     widget = const NoInternet();
   }
@@ -66,33 +64,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => StorieCubit()..getStorie()),
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
-        BlocProvider(
-          create: (context) => FavoriteCubit(),
-        ),
+        BlocProvider(create: (context) => StorieCubit()..getStorie()),
       ],
       child: BlocConsumer<StorieCubit, StorieStates>(
         listener: (context, state) {},
         builder: (context, state) {
-        return ScreentasiaInit(
-      adaptiveFrom: AdaptiveFrom.mobile, 
-      adaptivePercentage: const AdaptivePercentage(mobile:100,tablet:100,desktop:100),
-      builder: (context , child) {
-        return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: getApplicationTheme(),
-            home: child,
-          );
-      },
-      child: SplashScreens(
+     
+          return ScreentasiaInit(
+            adaptiveFrom: AdaptiveFrom.mobile,
+            adaptivePercentage: const AdaptivePercentage(
+                mobile: 100, tablet: 100, desktop: 100),
+            builder: (context, child) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: getApplicationTheme(),
+                home: child,
+              );
+            },
+            child: SplashScreens(
               startWidget: startWidget,
             ),
-    );
-          
-         
+          );
         },
       ),
     );
