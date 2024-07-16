@@ -1,4 +1,3 @@
-
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:storynory/modules/layout/controller/cubit.dart';
@@ -11,9 +10,9 @@ class CardsSwiper extends StatelessWidget {
   final StorieCubit cubit;
 
   const CardsSwiper({
-    Key? key,
+    super.key,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class CardsSwiper extends StatelessWidget {
       );
     }
 
-          cubit.stories.shuffle();
+    cubit.stories.shuffle();
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
@@ -37,7 +36,6 @@ class CardsSwiper extends StatelessWidget {
         itemWidth: size.width * 0.78,
         itemHeight: size.height * 0.5,
         itemBuilder: (_, index) {
-         
           final movie = cubit.stories[index];
 
           //  movie.heroId = 'swiper-${movie.id}';
@@ -46,16 +44,16 @@ class CardsSwiper extends StatelessWidget {
             onTap: () {
               AdInterstitialView.loadinterstitalAd();
               navigateTo(
-                context,
-                StorieScreen(
-                  title: movie.title!,
-                  text: movie.text!,
-                  image: movie.image!,
-                  author: movie.author!,
-                  dec: movie.dec!,
-                  id: movie.id!,
-                ));
-                cubit.updateData(count: 1, uId: movie.id!);
+                  context,
+                  StorieScreen(
+                    title: movie.title!,
+                    text: movie.text!,
+                    image: movie.image!,
+                    author: movie.author!,
+                    dec: movie.dec!,
+                    id: movie.id!,
+                  ));
+              cubit.updateData(count: 1, uId: movie.id!);
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),

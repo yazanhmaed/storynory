@@ -9,10 +9,8 @@ import 'package:storynory/modules/layout/controller/states.dart';
 import '../../../../models/ads/banner_ad.dart';
 import '../../../../resources/color_manager.dart';
 
-
-
 class HomeStorysScreen extends StatelessWidget {
-  const HomeStorysScreen({Key? key}) : super(key: key);
+  const HomeStorysScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class HomeStorysScreen extends StatelessWidget {
                   cubit: cubit,
                 ),
               ),
-             const AdBannerModels()
+              const AdBannerModels()
             ],
           ),
         );

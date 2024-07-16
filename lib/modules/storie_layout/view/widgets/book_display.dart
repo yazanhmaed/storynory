@@ -1,5 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:pagination_flutter/pagination.dart';
 import 'package:screentasia/screentasia.dart';
+import 'package:storynory/modules/layout/controller/cubit.dart';
 import 'package:word_selectable_text/word_selectable_text.dart';
 
 import '../../../../resources/color_manager.dart';
@@ -8,23 +10,22 @@ import '../../../../resources/styles_manager.dart';
 import '../../../../resources/values_manager.dart';
 
 class BookDisplay extends StatefulWidget {
-  const BookDisplay(
-      {Key? key, 
-      required this.text,
-      required this.title,
-      required this.author,
-      required this.image,
-      required this.dec,
-      this.cubit,
-      }) : super(key: key);
+  const BookDisplay({
+    super.key,
+    required this.text,
+    required this.title,
+    required this.author,
+    required this.image,
+    required this.dec,
+    required this.cubit,
+  });
 
   final String title;
   final String author;
   final String image;
   final String dec;
   final String text;
-  final dynamic cubit;
- 
+  final StorieCubit cubit;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -76,6 +77,12 @@ class _BookDisplayState extends State<BookDisplay> {
     return Scaffold(
       backgroundColor: ColorManager.lightPrimary,
       body: PageView.builder(
+        onPageChanged: (value) {
+          if (widget.cubit.orword.isNotEmpty) {
+            widget.cubit.empty();
+            widget.cubit.changecurrentSwitch(false);
+          }
+        },
         physics: const BouncingScrollPhysics(),
         controller: _pageController,
         itemCount: _pages.length,
@@ -133,7 +140,7 @@ class _BookDisplayState extends State<BookDisplay> {
                         width: 20,
                       ),
                       Text(
-                        '( ${index + 1} / ${_pages.length} )',
+                        '( $index  / ${_pages.length} )',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const Icon(
@@ -159,8 +166,8 @@ class _BookDisplayState extends State<BookDisplay> {
                           highlightColor: ColorManager.amber,
                           selectable: true,
                           text: _pages[index],
+                          highlight: widget.cubit.highlight,
                           onWordTapped: (word, index) async {
-                            print(word);
                             widget.cubit.translatorWord(text: word);
                             widget.cubit.word(word: word);
                           },
@@ -174,20 +181,13 @@ class _BookDisplayState extends State<BookDisplay> {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8).w,
-                      child: Center(
-                          child: Text(
-                        '( ${index + 1} / ${_pages.length} )',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )),
-                    ),
+
+           
                   ],
                 ),
                 if (widget.cubit.transWord != '' &&
                     widget.cubit.orword != '' &&
-                    _pageController.page!.toInt() == index)
+                    _pageController.page!.toInt() == index) ...[
                   Container(
                     width: double.infinity,
                     height: 60.h,
@@ -218,6 +218,63 @@ class _BookDisplayState extends State<BookDisplay> {
                       ],
                     ),
                   )
+                ],
+                if (!(widget.cubit.transWord != '' &&
+                    widget.cubit.orword != '' &&
+                    _pageController.page!.toInt() == index)) ...[
+                  Pagination(
+                    numOfPages: _pages.length - 1,
+                    selectedPage: index,
+                    pagesVisible: 4,
+                    spacing: 5,
+                    onPageChanged: (page) {
+                      setState(() {
+                        _pageController.jumpToPage(page);
+                        index = page;
+                      });
+                    },
+                    nextIcon: Icon(
+                      Icons.chevron_right_rounded,
+                      color: ColorManager.primary,
+                      size: 20,
+                    ),
+                    previousIcon: Icon(
+                      Icons.chevron_left_rounded,
+                      color: ColorManager.primary,
+                      size: 20,
+                    ),
+                    activeTextStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    activeBtnStyle: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all(ColorManager.primary),
+                      shape: WidgetStateProperty.all(CircleBorder(
+                        side: BorderSide(
+                          color: ColorManager.primary,
+                          width: 1,
+                        ),
+                      )),
+                    ),
+                    inactiveBtnStyle: ButtonStyle(
+                      elevation: WidgetStateProperty.all(0),
+                      backgroundColor: WidgetStateProperty.all(Colors.white),
+                      shape: WidgetStateProperty.all(CircleBorder(
+                        side: BorderSide(
+                          color: ColorManager.primary,
+                          width: 1,
+                        ),
+                      )),
+                    ),
+                    inactiveTextStyle: TextStyle(
+                      fontSize: 14,
+                      color: ColorManager.primary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ]
               ],
             ),
           );

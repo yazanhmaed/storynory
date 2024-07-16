@@ -4,7 +4,6 @@ import 'package:storynory/modules/layout/controller/cubit.dart';
 import 'package:storynory/modules/storie_layout/view/screens/storie_screen.dart';
 import 'package:storynory/resources/components.dart';
 
-
 class MovieCardItem extends StatelessWidget {
   final int itemIndex;
   final int itemCount;
@@ -13,13 +12,13 @@ class MovieCardItem extends StatelessWidget {
   final StorieCubit cubit;
 
   const MovieCardItem({
-    Key? key,
+    super.key,
     required this.itemIndex,
     required this.itemCount,
     required this.needsSpacing,
     this.model,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +41,7 @@ class MovieCardItem extends StatelessWidget {
         },
         child: SizedBox(
           width: 150.w,
+          height: 100.h,
           child: Hero(
             tag: model.image!,
             child: ClipRRect(

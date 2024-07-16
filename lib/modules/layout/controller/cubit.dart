@@ -77,7 +77,8 @@ class StorieCubit extends Cubit<StorieStates> {
 
   String? transWord = '';
 
-  String? orword = '';
+  String orword = '';
+  bool highlight = false;
   final translator = GoogleTranslator();
   void translatorWord({required String text}) {
     translator.translate(text, from: 'en', to: lan ?? 'ar').then((value) {
@@ -92,11 +93,13 @@ class StorieCubit extends Cubit<StorieStates> {
   void empty() {
     orword = '';
     transWord = '';
+    highlight = false;
     emit(TextEmptewordState());
   }
 
   void word({required String word}) {
     orword = word;
+    highlight = true;
     emit(TextwordState());
   }
 
@@ -153,13 +156,13 @@ class StorieCubit extends Cubit<StorieStates> {
       }
     });
   }
+
 //////////////////////////////////////////////////
-final userF = FirebaseAuth.instance.currentUser;
+  final userF = FirebaseAuth.instance.currentUser;
   List<FavoriteModel> favSt = [];
   bool boolfav = false;
   void getFavoriteStorie() async {
     favSt = [];
-    
 
     await FirebaseFirestore.instance
         .collection('user')
@@ -251,6 +254,4 @@ final userF = FirebaseAuth.instance.currentUser;
     });
     emit(StorieBoolFavState());
   }
-
-
 }
