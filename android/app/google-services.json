@@ -38,6 +38,13 @@
             {
               "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storynorys.storynory"
+              }
             }
           ]
         }
@@ -75,6 +82,13 @@
             {
               "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storynorys.storynory"
+              }
             }
           ]
         }
@@ -112,6 +126,13 @@
             {
               "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storynorys.storynory"
+              }
             }
           ]
         }
@@ -126,19 +147,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "694326366389-2lt9j15gd5np61lk26pngt6nlgsnj4n4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.storynory",
-            "certificate_hash": "e9dc2cff28176cdadeb5987b6c1dac09fcda18ee"
-          }
-        },
-        {
           "client_id": "694326366389-3tf59pot4sgfev8tarfp56fs9ai7jc7q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.storynory",
             "certificate_hash": "167695f7ef9c70f50f0a9aa1ae2ef999376f80f7"
+          }
+        },
+        {
+          "client_id": "694326366389-p9tp8ht0bv6n5sklrsbgr8rfjfsc20jl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.storynory",
+            "certificate_hash": "800d0d4fcf4ffc67b83e1afd014082c5cbb3f734"
           }
         },
         {
@@ -157,6 +178,13 @@
             {
               "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storynorys.storynory"
+              }
             }
           ]
         }
@@ -187,6 +215,14 @@
           }
         },
         {
+          "client_id": "694326366389-iph3b5usov4e2l1vbra341l5k4hmpfkg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storynorys.storynory",
+            "certificate_hash": "800d0d4fcf4ffc67b83e1afd014082c5cbb3f734"
+          }
+        },
+        {
           "client_id": "694326366389-il4nh9fu8bm7ibq2konlcf5h9gofvac8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -202,6 +238,13 @@
             {
               "client_id": "694326366389-38hf8lmah20hatpvlcvgd205l275ob6l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storynorys.storynory"
+              }
             }
           ]
         }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.694326366389-t7a3itrvgghi2i7bd7a14i90d1i79lgq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>694326366389-0qvu9uplj0l9e9ctfdf341i83539sqca.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDFfu4MwvXbyK7fGi32bQY35tZJugxSgGY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>694326366389</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.storynorys.storynory</string>
+	<key>PROJECT_ID</key>
+	<string>stories-english-4c485</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stories-english-4c485.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:694326366389:ios:33f5302612f7cd4525aefc</string>
+	<key>DATABASE_URL</key>
+	<string>https://stories-english-4c485-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
