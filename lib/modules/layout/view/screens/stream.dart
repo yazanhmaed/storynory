@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:storynory/modules/login_screen/view/screens/login_screen.dart';
+import 'package:storynory/modules/authentication/view/screens/authentication_screen.dart';
 
 import 'home_layout.dart';
 
 class StreamScreen extends StatelessWidget {
-  const StreamScreen({Key? key}) : super(key: key);
+  const StreamScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class StreamScreen extends StatelessWidget {
               child: Text('Somthing Went Wrong!'),
             );
           } else {
-            return const LoginScreen();
+            return const AuthenticationScreen();
           }
         },
       ),

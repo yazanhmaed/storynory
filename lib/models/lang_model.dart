@@ -1,7 +1,6 @@
-class LangModel {
-  String? lang;
-  LangModel({
-    this.lang,
+class LanguageModel {
+  String? language;
+  LanguageModel({
+    this.language,
   });
-  
 }

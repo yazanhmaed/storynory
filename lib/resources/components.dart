@@ -24,7 +24,7 @@ void navigateAndFinish(
     );
 int currentIndex = 0;
 String? token = '';
-String? lan = 'ar';
+String? language = 'ar';
 String nameUser = '';
 
 List<String> favoriteList = [];

@@ -5,7 +5,7 @@ import '../values_manager.dart';
 
 class InputText extends StatelessWidget {
   const InputText({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.labelText,
     required this.validator,
@@ -16,7 +16,7 @@ class InputText extends StatelessWidget {
     this.type,
     this.suffixIcon,
     required this.controller,
-  }) : super(key: key);
+  });
   final String hintText;
   final String labelText;
   final String validator;

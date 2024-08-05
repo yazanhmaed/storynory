@@ -18,7 +18,7 @@ class CardsSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    if (cubit.storie.isEmpty) {
+    if (cubit.stories.isEmpty) {
       return SizedBox(
         width: double.infinity,
         height: size.height * 0.54,
@@ -37,8 +37,6 @@ class CardsSwiper extends StatelessWidget {
         itemHeight: size.height * 0.5,
         itemBuilder: (_, index) {
           final movie = cubit.stories[index];
-
-          //  movie.heroId = 'swiper-${movie.id}';
 
           return GestureDetector(
             onTap: () {

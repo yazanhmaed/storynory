@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/layout/controller/states.dart';
-import 'package:storynory/modules/login_screen/controller/cubit.dart';
+import 'package:storynory/modules/authentication/controller/cubit.dart';
 import 'package:storynory/modules/splash_screen/view/screens/splashscreen.dart';
 import 'package:storynory/resources/theme_manager.dart';
 
@@ -26,12 +25,11 @@ class _StartScreenState extends State<StartScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginCubit(),
+          create: (context) => AuthenticationCubit(),
         ),
         BlocProvider(create: (context) => StorieCubit()..getStorie()),
       ],
-      child: BlocConsumer<StorieCubit, StorieStates>(
-        listener: (context, state) {},
+      child: BlocBuilder<StorieCubit, StorieStates>(
         builder: (context, state) {
           return ScreentasiaInit(
             adaptiveFrom: AdaptiveFrom.mobile,
@@ -44,7 +42,7 @@ class _StartScreenState extends State<StartScreen> {
                 home: child,
               );
             },
-            child: const SplashScreens(),
+            child: const SafeArea(child: SplashScreens()),
           );
         },
       ),

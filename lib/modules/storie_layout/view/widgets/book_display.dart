@@ -78,9 +78,8 @@ class _BookDisplayState extends State<BookDisplay> {
       backgroundColor: ColorManager.lightPrimary,
       body: PageView.builder(
         onPageChanged: (value) {
-          if (widget.cubit.orword.isNotEmpty) {
-            widget.cubit.empty();
-            widget.cubit.changecurrentSwitch(false);
+          if (widget.cubit.originalWord.isNotEmpty) {
+            widget.cubit.emptyTranslatorWord();
           }
         },
         physics: const BouncingScrollPhysics(),
@@ -169,7 +168,6 @@ class _BookDisplayState extends State<BookDisplay> {
                           highlight: widget.cubit.highlight,
                           onWordTapped: (word, index) async {
                             widget.cubit.translatorWord(text: word);
-                            widget.cubit.word(word: word);
                           },
                           style: TextStyle(
                             fontSize: 18.sp,
@@ -181,12 +179,10 @@ class _BookDisplayState extends State<BookDisplay> {
                         ),
                       ),
                     ),
-
-           
                   ],
                 ),
                 if (widget.cubit.transWord != '' &&
-                    widget.cubit.orword != '' &&
+                    widget.cubit.originalWord != '' &&
                     _pageController.page!.toInt() == index) ...[
                   Container(
                     width: double.infinity,
@@ -200,7 +196,7 @@ class _BookDisplayState extends State<BookDisplay> {
                         ),
                         Expanded(
                           child: Text(
-                            '${widget.cubit.orword} : ${widget.cubit.transWord!}',
+                            '${widget.cubit.originalWord} : ${widget.cubit.transWord!}',
                             style: getBoldStyle(
                                 color: ColorManager.white,
                                 fontSize: AppSize.s20.sp),
@@ -209,8 +205,7 @@ class _BookDisplayState extends State<BookDisplay> {
                         IconButton(
                           tooltip: AppString.hideText,
                           onPressed: () {
-                            widget.cubit.empty();
-                            widget.cubit.changecurrentSwitch(false);
+                            widget.cubit.emptyTranslatorWord();
                           },
                           icon: const Icon(Icons.arrow_drop_down_circle_sharp),
                           color: ColorManager.darksecondary,
@@ -220,7 +215,7 @@ class _BookDisplayState extends State<BookDisplay> {
                   )
                 ],
                 if (!(widget.cubit.transWord != '' &&
-                    widget.cubit.orword != '' &&
+                    widget.cubit.originalWord != '' &&
                     _pageController.page!.toInt() == index)) ...[
                   Pagination(
                     numOfPages: _pages.length - 1,

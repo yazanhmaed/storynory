@@ -12,10 +12,10 @@ import '../../../../resources/string_manager.dart';
 import '../widgets/list_setting_widget.dart';
 import '../../../../shared/network/local/cache_helper.dart';
 import '../../../favorite_screen/view/screens/favorite_screen.dart';
-import '../../../login_screen/view/screens/login_screen.dart';
+import '../../../authentication/view/screens/authentication_screen.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +172,8 @@ class SettingScreen extends StatelessWidget {
                   ListSetting(
                       ontap: () {
                         CacheHelper.removeData(key: 'token').then((value) =>
-                            navigateAndFinish(context, const LoginScreen()));
+                            navigateAndFinish(
+                                context, const AuthenticationScreen()));
                         currentIndex = 0;
                         FirebaseAuth.instance.signOut().then((value) {
                           googleSignIn.disconnect();

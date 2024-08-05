@@ -2,10 +2,11 @@ class AppString {
   static const noRouteFound = 'No Route Found';
 
   // basic elements
+  static const logoImage = 'assets/images/logo.png';
   static const storie = 'Storie';
   static const advanceStorie = 'Advance Storie';
   static const storynory = 'Storynory';
-  static const errorimage = 'assets/images/play_store.png';
+  static const errorimage = 'assets/images/logo.png';
   static const google = 'assets/images/google.png';
   static const googleUrl =
       'https://pbs.twimg.com/profile_images/1605297940242669568/q8-vPggS_400x400.jpg';

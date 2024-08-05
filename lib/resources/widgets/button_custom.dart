@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ButtomCustom extends StatelessWidget {
   const ButtomCustom(
-      {Key? key, 
+      {super.key, 
       required this.text,
       this.onPressed,
       required this.color,
-      this.textStyle}) : super(key: key);
+      this.textStyle});
 
   final String text;
   final Color color;
@@ -17,7 +17,7 @@ class ButtomCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)),
+      style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color)),
       child: Text(
         text,
         style: textStyle,

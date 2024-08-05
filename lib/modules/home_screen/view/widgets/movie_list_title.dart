@@ -3,15 +3,14 @@ import 'package:storynory/modules/layout/controller/cubit.dart';
 
 import 'package:storynory/resources/color_manager.dart';
 
-
 class MovieListTitle extends StatelessWidget {
   final String title;
   final StorieCubit cubit;
   const MovieListTitle({
-    Key? key,
+    super.key,
     required this.title,
     required this.cubit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class MovieListTitle extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () => cubit.changecurrentIndex(1),
+            onTap: () => cubit.changeCurrentIndex(1),
             child: Text(
               'See all',
               style: TextStyle(

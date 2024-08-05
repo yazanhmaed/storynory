@@ -7,22 +7,19 @@ import 'package:storynory/resources/color_manager.dart';
 
 import 'package:storynory/resources/string_manager.dart';
 
-
 import 'package:storynory/resources/components.dart';
 
-
 class HomeLayoutScreen extends StatelessWidget {
-  const HomeLayoutScreen({Key? key}) : super(key: key);
+  const HomeLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StorieCubit, StorieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<StorieCubit, StorieStates>(
       builder: (context, state) {
         var cubit = StorieCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.primary,
-          body: cubit.screen[currentIndex],
+          body: SafeArea(child: cubit.screen[currentIndex]),
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
@@ -51,7 +48,7 @@ class HomeLayoutScreen extends StatelessWidget {
               if (index == 3) {
                 showSearch(context: context, delegate: SearchDataScreen());
               } else {
-                cubit.changecurrentIndex(index);
+                cubit.changeCurrentIndex(index);
               }
             },
           ),

@@ -13,7 +13,7 @@ import 'package:translator/translator.dart';
 
 import '../../../models/storie_model.dart';
 import '../../favorite_screen/view/screens/favorite_screen.dart';
-import '../../home_screen/view/screens/storys.dart';
+import '../../home_screen/view/screens/stories_screen.dart';
 import '../../home_screen/view/screens/home_screen.dart';
 import '../../setting_screen/view/screens/setting_screen.dart';
 
@@ -22,28 +22,15 @@ class StorieCubit extends Cubit<StorieStates> {
 
   static StorieCubit get(context) => BlocProvider.of(context);
 
-  List<StorieModel> storie = [];
-  List<StorieModel> stories = [];
+  List<Widget> screen = [
+    const HomeStorysScreen(),
+    const StoriesScreen(),
+    const FavoriteScreen(),
+    Container(),
+    const SettingScreen(),
+  ];
 
-  Future<void> getStorie() async {
-    storie = [];
-    stories = [];
-    emit(StorieGetloadingState());
-    await FirebaseFirestore.instance.collection('Storie').get().then((value) {
-      for (var e in value.docs) {
-        storie.add(StorieModel.fromJson(e.data()));
-      }
-
-      stories.addAll(storie);
-
-      emit(StorieGetSuccessState());
-    }).catchError((onError) {
-      print(onError);
-      emit(StorieGetErrorState());
-    });
-  }
-
-  final List<Map<String, dynamic>> items = [
+  final List<Map<String, dynamic>> itemsTranslator = [
     {
       'value': 'ar',
       'label': 'English to Arabic',
@@ -65,23 +52,43 @@ class StorieCubit extends Cubit<StorieStates> {
       'label': 'English to Portuguese',
     },
   ];
-  String tranLang = 'ar';
+  String translatorLang = 'ar';
+  String? transWord = '';
+  String originalWord = '';
+  bool highlight = false;
+  List<StorieModel> stories = [];
+  final translator = GoogleTranslator();
 
-  void translation(String val) {
-    LangModel langModel;
-    tranLang = val;
-    langModel = LangModel(lang: val);
-    print(tranLang);
-    emit(StorieLangSuccessState(langModel));
+  final user = FirebaseAuth.instance.currentUser;
+  List<FavoriteModel> favorites = [];
+  bool isFavorites = false;
+
+  Future<void> getStorie() async {
+    stories = [];
+    emit(StorieGetloadingState());
+    await FirebaseFirestore.instance.collection('Storie').get().then((value) {
+      for (var e in value.docs) {
+        stories.add(StorieModel.fromJson(e.data()));
+      }
+      emit(StorieGetSuccessState());
+    }).catchError((onError) {
+      print(onError);
+      emit(StorieGetErrorState());
+    });
   }
 
-  String? transWord = '';
+  void translation(String value) {
+    LanguageModel languageModel;
+    translatorLang = value;
+    languageModel = LanguageModel(language: value);
+    print(translatorLang);
+    emit(StorieLanguageSuccessState(languageModel));
+  }
 
-  String orword = '';
-  bool highlight = false;
-  final translator = GoogleTranslator();
   void translatorWord({required String text}) {
-    translator.translate(text, from: 'en', to: lan ?? 'ar').then((value) {
+    originalWord = text;
+    highlight = true;
+    translator.translate(text, from: 'en', to: language ?? 'ar').then((value) {
       transWord = value.toString();
       emit(TextTransSuccessState());
     }).catchError((onError) {
@@ -90,17 +97,11 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  void empty() {
-    orword = '';
+  void emptyTranslatorWord() {
+    originalWord = '';
     transWord = '';
     highlight = false;
     emit(TextEmptewordState());
-  }
-
-  void word({required String word}) {
-    orword = word;
-    highlight = true;
-    emit(TextwordState());
   }
 
   void updateData({
@@ -118,26 +119,12 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  List<Widget> screen = [
-    const HomeStorysScreen(),
-    const StorysScreen(),
-    const FavoriteScreen(),
-    Container(),
-    const SettingScreen(),
-  ];
-  void changecurrentIndex(int index) {
+  void changeCurrentIndex(int index) {
     currentIndex = index;
     emit(StorieChangeState());
   }
 
-  bool switched = false;
-  void changecurrentSwitch(bool index) {
-    switched = index;
-    emit(StorieChangeSwatchState());
-  }
-
-  bool f = false;
-  void getFav({required String id}) {
+  void getFavorites({required String id}) {
     FirebaseFirestore.instance
         .collection('user')
         .doc(token)
@@ -145,25 +132,14 @@ class StorieCubit extends Cubit<StorieStates> {
         .doc(id)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        f = true;
-        emit(StorieChangeFavState());
-        print('f= $f');
-      } else {
-        f = false;
-        emit(StorieChangeFavState());
-        print('f= $f');
-      }
+      emit(StorieChangeFavState());
     });
   }
 
 //////////////////////////////////////////////////
-  final userF = FirebaseAuth.instance.currentUser;
-  List<FavoriteModel> favSt = [];
-  bool boolfav = false;
-  void getFavoriteStorie() async {
-    favSt = [];
 
+  void getFavoriteStorie() async {
+    favorites = [];
     await FirebaseFirestore.instance
         .collection('user')
         .doc(token)
@@ -171,7 +147,7 @@ class StorieCubit extends Cubit<StorieStates> {
         .get()
         .then((value) {
       for (var e in value.docs) {
-        favSt.add(FavoriteModel.fromJson(e.data()));
+        favorites.add(FavoriteModel.fromJson(e.data()));
       }
       emit(StorieGetFavSuccessState());
     }).catchError((onError) {
@@ -180,9 +156,7 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  StorieModel storieModel = StorieModel();
-
-  void favirote({
+  void setFavirotes({
     required String id,
     required String title,
     required String dec,
@@ -205,26 +179,26 @@ class StorieCubit extends Cubit<StorieStates> {
       'image': image,
       'view': view,
     }).then((value) {
-      boolFav(id: id);
+      boolFavorites(id: id);
       getFavoriteStorie();
       emit(StorieUserFavSuccessState());
     }).catchError((onError) {
-      emit(StorieUserFavErrorState());
       print(onError);
+      emit(StorieUserFavErrorState());
     });
   }
 
-  void removeFavorite({
+  void removeFavorites({
     required String id,
   }) {
     FirebaseFirestore.instance
         .collection('user')
-        .doc(userF!.uid)
+        .doc(user!.uid)
         .collection('favorite')
         .doc(id)
         .delete()
         .then((value) {
-      boolFav(id: id);
+      boolFavorites(id: id);
       getFavoriteStorie();
       emit(StorieRemoveFavSuccessState());
     }).catchError((onError) {
@@ -232,9 +206,7 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  void boolFav({required String id}) {
-    //boolfav = favoriteList.contains(id);
-    // print(boolfav);
+  void boolFavorites({required String id}) {
     FirebaseFirestore.instance
         .collection('user')
         .doc(token)
@@ -243,13 +215,11 @@ class StorieCubit extends Cubit<StorieStates> {
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        boolfav = true;
+        isFavorites = true;
         emit(StorieChangeFavState());
-        print('f= $boolfav');
       } else {
-        boolfav = false;
+        isFavorites = false;
         emit(StorieChangeFavState());
-        print('f= $boolfav');
       }
     });
     emit(StorieBoolFavState());

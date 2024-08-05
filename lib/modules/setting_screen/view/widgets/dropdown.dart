@@ -11,30 +11,29 @@ import '../../../../shared/network/local/cache_helper.dart';
 import '../../../../resources/components.dart';
 
 class DropDownWidget extends StatelessWidget {
-  const DropDownWidget({Key? key}) : super(key: key);
+  const DropDownWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<StorieCubit, StorieStates>(
       listener: (context, state) {
-        if (state is StorieLangSuccessState) {
-          if (state.langModel.lang != null) {
-            CacheHelper.seveData(key: 'lang', value: state.langModel.lang)
+        if (state is StorieLanguageSuccessState) {
+          if (state.langModel.language != null) {
+            CacheHelper.seveData(key: 'lang', value: state.langModel.language)
                 .then((value) {
-              print(state.langModel.lang);
-              lan = state.langModel.lang;
+              print(state.langModel.language);
+              language = state.langModel.language!;
             }).catchError((onError) {
               print(onError);
             });
           }
         }
-       
       },
       builder: (context, state) {
         var cubit = StorieCubit.get(context);
         return SelectFormField(
           type: SelectFormFieldType.dropdown,
-          initialValue: lan,
+          initialValue: language,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: ColorManager.white)),
@@ -49,7 +48,7 @@ class DropDownWidget extends StatelessWidget {
               color: ColorManager.white,
               fontWeight: FontWeight.bold,
               fontSize: 18),
-          items: cubit.items,
+          items: cubit.itemsTranslator,
           onChanged: (val) {
             cubit.translation(val);
           },

@@ -8,7 +8,7 @@ import 'package:storynory/resources/widgets/button_custom.dart';
 import '../../../../resources/components.dart';
 import '../../../../resources/string_manager.dart';
 import '../../../../shared/network/local/cache_helper.dart';
-import '../../../login_screen/view/screens/login_screen.dart';
+import '../../../authentication/view/screens/authentication_screen.dart';
 import '../../../on_boarding/view/screens/on_boarding_screen.dart';
 
 class NoInternet extends StatelessWidget {
@@ -63,7 +63,8 @@ class NoInternet extends StatelessWidget {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen()));
+                              builder: (context) =>
+                                  const AuthenticationScreen()));
                     }
                   } else {
                     // ignore: use_build_context_synchronously

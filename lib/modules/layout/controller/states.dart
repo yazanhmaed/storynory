@@ -1,6 +1,5 @@
 import 'package:storynory/models/lang_model.dart';
 
-
 abstract class StorieStates {}
 
 class StorieInitialState extends StorieStates {}
@@ -37,12 +36,13 @@ class StorieUpdateErrorState extends StorieStates {}
 class StorieChangeState extends StorieStates {}
 
 class StorieChangeSwatchState extends StorieStates {}
+
 class StorieChangeFavState extends StorieStates {}
 
-class StorieLangSuccessState extends StorieStates {
-  final LangModel langModel;
+class StorieLanguageSuccessState extends StorieStates {
+  final LanguageModel langModel;
 
-  StorieLangSuccessState(this.langModel);
+  StorieLanguageSuccessState(this.langModel);
 }
 
 //Trans
@@ -66,7 +66,5 @@ class StorieGetFavErrorState extends StorieStates {}
 class StorieRemoveFavSuccessState extends StorieStates {}
 
 class StorieRemoveFavErrorState extends StorieStates {}
+
 class StorieBoolFavState extends StorieStates {}
-
-
-

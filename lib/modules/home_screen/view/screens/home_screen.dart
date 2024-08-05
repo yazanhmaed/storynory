@@ -14,34 +14,35 @@ class HomeStorysScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StorieCubit, StorieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<StorieCubit, StorieStates>(
       builder: (context, state) {
         var cubit = StorieCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.primary,
-          body: Column(
-            children: [
-              Text(
-                'Storynory',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30.sp),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              CardsSwiper(cubit: cubit),
-              MovieListTitle(title: 'New Stories', cubit: cubit),
-              Expanded(
-                child: MovieList(
-                  itemCount: 5,
-                  cubit: cubit,
+          body: SafeArea(
+            child: Column(
+              children: [
+                Text(
+                  'Storynory',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30.sp),
                 ),
-              ),
-              const AdBannerModels()
-            ],
+                SizedBox(
+                  height: 10.h,
+                ),
+                CardsSwiper(cubit: cubit),
+                MovieListTitle(title: 'New Stories', cubit: cubit),
+                Expanded(
+                  child: MovieList(
+                    itemCount: 5,
+                    cubit: cubit,
+                  ),
+                ),
+                const AdBannerModels()
+              ],
+            ),
           ),
         );
       },

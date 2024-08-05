@@ -12,32 +12,31 @@ import '../../../../models/ads/view_ad.dart';
 import '../../../../resources/components.dart';
 import '../../../storie_layout/view/screens/storie_screen.dart';
 
-class StorysScreen extends StatelessWidget {
-  const StorysScreen({Key? key}) : super(key: key);
+class StoriesScreen extends StatelessWidget {
+  const StoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StorieCubit, StorieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<StorieCubit, StorieStates>(
       builder: (context, state) {
         var cubit = StorieCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.primary,
           body: ConditionalBuilder(
-            condition: cubit.storie.isNotEmpty,
+            condition: cubit.stories.isNotEmpty,
             builder: (context) => Column(
               children: [
                 Expanded(
                   child: GridView.builder(
                     padding: const EdgeInsets.only(top: 20),
                     physics: const BouncingScrollPhysics(),
-                    itemCount: cubit.storie.length,
+                    itemCount: cubit.stories.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                     ),
                     itemBuilder: (context, index) {
-                      int revIndex = cubit.storie.length - 1 - index;
+                      int revIndex = cubit.stories.length - 1 - index;
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
@@ -46,27 +45,27 @@ class StorysScreen extends StatelessWidget {
                             navigateTo(
                                 context,
                                 StorieScreen(
-                                  title: cubit.storie[revIndex].title!,
-                                  text: cubit.storie[revIndex].text!,
-                                  image: cubit.storie[revIndex].image!,
-                                  author: cubit.storie[revIndex].author!,
-                                  dec: cubit.storie[revIndex].dec!,
-                                  id: cubit.storie[revIndex].id!,
+                                  title: cubit.stories[revIndex].title!,
+                                  text: cubit.stories[revIndex].text!,
+                                  image: cubit.stories[revIndex].image!,
+                                  author: cubit.stories[revIndex].author!,
+                                  dec: cubit.stories[revIndex].dec!,
+                                  id: cubit.stories[revIndex].id!,
                                 ));
                             cubit.updateData(
-                                count: 1, uId: cubit.storie[revIndex].id!);
+                                count: 1, uId: cubit.stories[revIndex].id!);
                           },
                           child: GridTile(
                             footer: GridTileBar(
                               backgroundColor: Colors.white60,
-                              title: Text(cubit.storie[revIndex].title!,
+                              title: Text(cubit.stories[revIndex].title!,
                                   style: TextStyle(
                                       color: ColorManager.primary,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center),
                             ),
                             child: Hero(
-                              tag: cubit.storie[revIndex].image!,
+                              tag: cubit.stories[revIndex].image!,
                               child: ClipRRect(
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(15),
@@ -75,7 +74,7 @@ class StorysScreen extends StatelessWidget {
                                     placeholder: const AssetImage(
                                         'assets/images/no_image.jpg'),
                                     image: NetworkImage(
-                                        cubit.storie[revIndex].image!),
+                                        cubit.stories[revIndex].image!),
                                     fit: BoxFit.cover),
                               ),
                             ),

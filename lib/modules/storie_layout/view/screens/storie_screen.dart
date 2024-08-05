@@ -6,19 +6,18 @@ import 'package:storynory/modules/layout/view/screens/home_layout.dart';
 import 'package:storynory/resources/color_manager.dart';
 import 'package:storynory/resources/components.dart';
 
-
 import '../widgets/book_display.dart';
 
 class StorieScreen extends StatelessWidget {
   const StorieScreen({
-    Key? key,
+    super.key,
     required this.title,
     required this.text,
     required this.author,
     required this.image,
     required this.dec,
     required this.id,
-  }) : super(key: key);
+  });
 
   final String id;
   final String title;
@@ -39,25 +38,25 @@ class StorieScreen extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    cubit.boolfav == false
-                        ? cubit.favirote(
+                    cubit.isFavorites == false
+                        ? cubit.setFavirotes(
                             author: author,
                             dec: dec,
                             id: id,
                             image: image,
                             text: text,
                             title: title)
-                        : cubit.removeFavorite(id: id);
+                        : cubit.removeFavorites(id: id);
                   },
-                  icon: cubit.boolfav == true
+                  icon: cubit.isFavorites == true
                       ? const Icon(Icons.favorite)
                       : const Icon(Icons.favorite_border))
             ],
             title: Text(title),
             leading: IconButton(
                 onPressed: () {
-                  cubit.empty();
-                  cubit.changecurrentIndex(0);
+                  cubit.emptyTranslatorWord();
+                  cubit.changeCurrentIndex(0);
                   navigateAndFinish(context, const HomeLayoutScreen());
                 },
                 icon: const Icon(Icons.arrow_back_ios)),

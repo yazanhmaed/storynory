@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:storynory/models/ads/ad_helper.dart';
 
 class AdBannerModels extends StatefulWidget {
-  const AdBannerModels({Key? key}) : super(key: key);
+  const AdBannerModels({super.key});
 
   @override
   State<AdBannerModels> createState() => _AdBannerModelsState();
@@ -50,7 +50,6 @@ class _AdBannerModelsState extends State<AdBannerModels> {
         width: _adSize.width.toDouble(),
         height: _adSize.height.toDouble(),
         child: AdWidget(ad: bannerAd),
-        // alignment: Alignment.center,
       );
     }
     return Container();
