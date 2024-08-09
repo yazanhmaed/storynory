@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+ import 'package:google_fonts/google_fonts.dart';
+import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/layout/controller/cubit.dart';
 
-import 'package:storynory/resources/color_manager.dart';
-
+ 
 class MovieListTitle extends StatelessWidget {
   final String title;
   final StorieCubit cubit;
@@ -15,25 +15,27 @@ class MovieListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       child: Row(
         children: [
           Text(
             title,
-            style: TextStyle(
-                color: ColorManager.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16),
+            style: GoogleFonts.getFont(
+              'Merriweather Sans',
+              color: Colors.white,
+              fontSize: 16.sp,
+            ),
           ),
           const Spacer(),
           GestureDetector(
             onTap: () => cubit.changeCurrentIndex(1),
             child: Text(
               'See all',
-              style: TextStyle(
-                  color: ColorManager.secondary2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+              style: GoogleFonts.getFont(
+                'Merriweather Sans',
+                color: Colors.amber,
+                fontSize: 16.sp,
+              ),
             ),
           ),
         ],

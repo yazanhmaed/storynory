@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:storynory/modules/on_boarding/view/screens/on_boarding_screen.dart';
 import 'package:storynory/resources/values_manager.dart';
 import 'package:storynory/modules/setting_screen/view/widgets/dropdown.dart';
@@ -102,7 +104,9 @@ class SettingScreen extends StatelessWidget {
                                     color: ColorManager.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              content: const DropDownWidget(),
+                              content: SizedBox(
+                                  width: MediaQuery.sizeOf(context).width,
+                                  child: const DropDownWidget()),
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
@@ -167,6 +171,17 @@ class SettingScreen extends StatelessWidget {
                       text: AppString.list4,
                       leading: FaIcon(
                         FontAwesomeIcons.book,
+                        color: ColorManager.white,
+                      )),
+                  ListSetting(
+                      ontap: () {
+                        final InAppReview inAppReview = InAppReview.instance;
+
+                        inAppReview.openStoreListing();
+                      },
+                      text: 'Rate',
+                      leading: Icon(
+                        Icons.star,
                         color: ColorManager.white,
                       )),
                   ListSetting(

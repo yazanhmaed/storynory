@@ -67,13 +67,15 @@ dependencies:
  
   screentasia: ^1.1.0
   pagination_flutter: ^0.0.8
+  in_app_review: ^2.0.9
+  google_fonts: ^6.2.1
  
 
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/play_store.png"
+  image_path: "assets/images/logo.png"
 dev_dependencies:
   flutter_test:
     sdk: flutter

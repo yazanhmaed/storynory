@@ -1,3 +1,6 @@
+import 'package:google_fonts/google_fonts.dart';
+import 'package:screentasia/screentasia.dart';
+
 import './values_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -24,17 +27,23 @@ ThemeData getApplicationTheme() {
         elevation: AppSize.s1_5,
         shadowColor: ColorManager.secondary,
         centerTitle: true,
-        titleTextStyle:
-            getBoldStyle(color: ColorManager.white, fontSize: FontSize.s20),
-            iconTheme: IconThemeData(color: ColorManager.secondary)
-            ),
-    
+        titleTextStyle: GoogleFonts.getFont(
+          'Merriweather Sans',
+          color: Colors.white,
+          fontSize: 20.sp,
+        ),
+        iconTheme: IconThemeData(color: ColorManager.secondary)),
+
     //bottomNavigationBar Theme
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: ColorManager.primary,
-      selectedItemColor: ColorManager.secondary2,
-      unselectedItemColor: Colors.grey,
-    ),
+        backgroundColor: ColorManager.primary,
+        selectedItemColor: ColorManager.secondary2,
+        unselectedItemColor: Colors.grey,
+        unselectedLabelStyle: GoogleFonts.getFont(
+          'Merriweather Sans',
+          color: Colors.white,
+          fontSize: 12.sp,
+        )),
 //button theme
     buttonTheme: ButtonThemeData(
       shape: const StadiumBorder(),

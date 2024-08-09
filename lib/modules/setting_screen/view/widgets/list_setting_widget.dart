@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:screentasia/screentasia.dart';
 
 import '../../../../resources/color_manager.dart';
 import '../../../../resources/values_manager.dart';
@@ -8,11 +9,11 @@ class ListSetting extends StatelessWidget {
   final String text;
   final Widget? leading;
   const ListSetting({
-    Key? key,
+    super.key,
     required this.ontap,
     required this.text,
     required this.leading,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,11 @@ class ListSetting extends StatelessWidget {
         onTap: ontap,
         title: Text(
           text,
-          style:
-              TextStyle(color: ColorManager.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.getFont(
+            'Merriweather Sans',
+            color: Colors.white,
+            fontSize: 14.sp,
+          ),
         ),
         leading: leading,
         trailing: const Icon(

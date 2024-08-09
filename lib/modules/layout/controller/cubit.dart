@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:storynory/models/faviorit.dart';
 import 'package:storynory/models/lang_model.dart';
 import 'package:storynory/modules/layout/controller/states.dart';
+import 'package:storynory/modules/search/view/screens/search_screen.dart';
+import 'package:storynory/modules/search/view/screens/searchdata.dart';
 import 'package:storynory/resources/components.dart';
 
 import 'package:translator/translator.dart';
@@ -22,13 +24,23 @@ class StorieCubit extends Cubit<StorieStates> {
 
   static StorieCubit get(context) => BlocProvider.of(context);
 
-  List<Widget> screen = [
-    const HomeStorysScreen(),
-    const StoriesScreen(),
-    const FavoriteScreen(),
-    Container(),
-    const SettingScreen(),
-  ];
+  dynamic screen(BuildContext context) {
+    switch (currentIndex) {
+      case 0:
+        return const HomeStorysScreen();
+      case 1:
+        return const StoriesScreen();
+      case 2:
+        return const FavoriteScreen();
+      case 3:
+        return const SearchScreen();
+      case 4:
+        return const SettingScreen();
+
+      default:
+        return const HomeStorysScreen();
+    }
+  }
 
   final List<Map<String, dynamic>> itemsTranslator = [
     {
@@ -51,17 +63,21 @@ class StorieCubit extends Cubit<StorieStates> {
       'value': 'pt',
       'label': 'English to Portuguese',
     },
+    {
+      'value': 'tr',
+      'label': 'English to Turkish',
+    },
   ];
   String translatorLang = 'ar';
   String? transWord = '';
   String originalWord = '';
   bool highlight = false;
   List<StorieModel> stories = [];
+  List<StorieModel> storiesSearch = [];
   final translator = GoogleTranslator();
-
+  int bookDisplayIndex = 0;
   final user = FirebaseAuth.instance.currentUser;
   List<FavoriteModel> favorites = [];
-  bool isFavorites = false;
 
   Future<void> getStorie() async {
     stories = [];
@@ -179,7 +195,6 @@ class StorieCubit extends Cubit<StorieStates> {
       'image': image,
       'view': view,
     }).then((value) {
-      boolFavorites(id: id);
       getFavoriteStorie();
       emit(StorieUserFavSuccessState());
     }).catchError((onError) {
@@ -198,7 +213,6 @@ class StorieCubit extends Cubit<StorieStates> {
         .doc(id)
         .delete()
         .then((value) {
-      boolFavorites(id: id);
       getFavoriteStorie();
       emit(StorieRemoveFavSuccessState());
     }).catchError((onError) {
@@ -206,22 +220,17 @@ class StorieCubit extends Cubit<StorieStates> {
     });
   }
 
-  void boolFavorites({required String id}) {
-    FirebaseFirestore.instance
-        .collection('user')
-        .doc(token)
-        .collection('favorite')
-        .doc(id)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        isFavorites = true;
-        emit(StorieChangeFavState());
-      } else {
-        isFavorites = false;
-        emit(StorieChangeFavState());
-      }
-    });
-    emit(StorieBoolFavState());
+//BookDisplay
+  void onPageChangedIndex(int index) {
+    bookDisplayIndex = index;
+    emit(StorieChangeState());
+  }
+
+    void filterItems(String query) {
+    final results = stories.where((item) => item.title!.toLowerCase().contains(query.toLowerCase())).toList();
+   
+      storiesSearch = results;
+    emit(StorieSearchState());
+   
   }
 }

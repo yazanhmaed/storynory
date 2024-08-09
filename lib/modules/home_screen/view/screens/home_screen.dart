@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/home_screen/view/widgets/card_swiper.dart';
 import 'package:storynory/modules/home_screen/view/widgets/movie_list.dart';
@@ -14,7 +16,18 @@ class HomeStorysScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StorieCubit, StorieStates>(
+    return BlocConsumer<StorieCubit, StorieStates>(
+      listener: (BuildContext context, state) async {
+        if (state is StorieGetSuccessState) {
+          final InAppReview inAppReview = InAppReview.instance;
+          if (await inAppReview.isAvailable()) {
+            inAppReview.requestReview();
+          }
+          if (StorieCubit.get(context).favorites.isEmpty) {
+            StorieCubit.get(context).getFavoriteStorie();
+          }
+        }
+      },
       builder: (context, state) {
         var cubit = StorieCubit.get(context);
         return Scaffold(
@@ -22,15 +35,16 @@ class HomeStorysScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                Text(
-                  'Storynory',
-                  style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Storynory',
+                    style: GoogleFonts.getFont(
+                      'Merriweather Sans',
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30.sp),
-                ),
-                SizedBox(
-                  height: 10.h,
+                      fontSize: 50.sp,
+                    ),
+                  ),
                 ),
                 CardsSwiper(cubit: cubit),
                 MovieListTitle(title: 'New Stories', cubit: cubit),

@@ -1,5 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/material.dart';
+import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/layout/controller/cubit.dart';
 import 'package:storynory/resources/components.dart';
 
@@ -29,12 +29,12 @@ class CardsSwiper extends StatelessWidget {
     cubit.stories.shuffle();
     return SizedBox(
       width: double.infinity,
-      height: size.height * 0.5,
+      height: size.height * 0.4,
       child: Swiper(
         itemCount: 4,
         layout: SwiperLayout.STACK,
         itemWidth: size.width * 0.78,
-        itemHeight: size.height * 0.5,
+        itemHeight: size.height * 0.4.h,
         itemBuilder: (_, index) {
           final movie = cubit.stories[index];
 

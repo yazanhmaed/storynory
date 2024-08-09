@@ -49,22 +49,27 @@ class _SplashScreensState extends State<SplashScreens> {
     return BlocListener<StorieCubit, StorieStates>(
       listener: (context, state) async {
         if (state is StorieGetSuccessState) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            if (result == true) {
-              if (onBoarding != null) {
-                if (token != null) {
-                  return const HomeLayoutScreen();
+          Future.delayed(
+            const Duration(seconds: 3),
+            () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                if (result == true) {
+                  if (onBoarding != null) {
+                    if (token != null) {
+                      return const HomeLayoutScreen();
+                    } else {
+                      return const AuthenticationScreen();
+                    }
+                  } else {
+                    return const OnBoardingScreen();
+                  }
                 } else {
-                  return const AuthenticationScreen();
+                  return const NoInternet();
                 }
-              } else {
-                return const OnBoardingScreen();
-              }
-            } else {
-              return const NoInternet();
-            }
-          }));
+              }));
+            },
+          );
         }
       },
       child: Scaffold(

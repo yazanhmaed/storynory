@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:screentasia/screentasia.dart';
 import 'package:storynory/modules/layout/controller/cubit.dart';
 import 'package:storynory/modules/layout/controller/states.dart';
 
@@ -55,27 +56,55 @@ class StoriesScreen extends StatelessWidget {
                             cubit.updateData(
                                 count: 1, uId: cubit.stories[revIndex].id!);
                           },
-                          child: GridTile(
-                            footer: GridTileBar(
-                              backgroundColor: Colors.white60,
-                              title: Text(cubit.stories[revIndex].title!,
-                                  style: TextStyle(
-                                      color: ColorManager.primary,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(0, 4),
+                                  blurRadius: 8.0,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Hero(
-                              tag: cubit.stories[revIndex].image!,
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15)),
-                                child: FadeInImage(
-                                    placeholder: const AssetImage(
-                                        'assets/images/no_image.jpg'),
-                                    image: NetworkImage(
-                                        cubit.stories[revIndex].image!),
-                                    fit: BoxFit.cover),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: GridTile(
+                                footer: GridTileBar(
+                                  backgroundColor: Colors.white60,
+                                  title: Text(
+                                    cubit.stories[revIndex].title!,
+                                    style: GoogleFonts.getFont(
+                                        'Merriweather Sans',
+                                        color: Colors.black,
+                                        fontSize: 14.sp),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                child: Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    FadeInImage(
+                                      placeholder: const AssetImage(
+                                          'assets/images/no_image.jpg'),
+                                      image: NetworkImage(
+                                          cubit.stories[revIndex].image!),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.black54,
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

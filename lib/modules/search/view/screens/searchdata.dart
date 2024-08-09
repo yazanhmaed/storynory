@@ -31,7 +31,7 @@ class SearchDataScreen extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          currentIndex = 0;
         },
         icon: Icon(
           Icons.arrow_back_ios,

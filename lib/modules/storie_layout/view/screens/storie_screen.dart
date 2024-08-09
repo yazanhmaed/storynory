@@ -38,17 +38,19 @@ class StorieScreen extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    cubit.isFavorites == false
-                        ? cubit.setFavirotes(
-                            author: author,
-                            dec: dec,
-                            id: id,
-                            image: image,
-                            text: text,
-                            title: title)
-                        : cubit.removeFavorites(id: id);
+                    if (cubit.favorites.any((e) => e.id == id)) {
+                      cubit.removeFavorites(id: id);
+                    } else {
+                      cubit.setFavirotes(
+                          author: author,
+                          dec: dec,
+                          id: id,
+                          image: image,
+                          text: text,
+                          title: title);
+                    }
                   },
-                  icon: cubit.isFavorites == true
+                  icon: cubit.favorites.any((e) => e.id == id) == true
                       ? const Icon(Icons.favorite)
                       : const Icon(Icons.favorite_border))
             ],

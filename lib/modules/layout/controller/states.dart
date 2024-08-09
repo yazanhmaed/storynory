@@ -68,3 +68,6 @@ class StorieRemoveFavSuccessState extends StorieStates {}
 class StorieRemoveFavErrorState extends StorieStates {}
 
 class StorieBoolFavState extends StorieStates {}
+
+class StorieSearchState extends StorieStates {}
+
